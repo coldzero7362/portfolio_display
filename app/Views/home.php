@@ -2,52 +2,60 @@
 
 <?= $this->section('content') ?>
 
-<section id="profile" class="profile">
-    <div class="container profile__inner">
-        <div class="profile__avatar" aria-hidden="true"><?= esc($profile['initial']) ?></div>
-        <div class="profile__body">
-            <p class="profile__role"><?= esc($profile['role']) ?></p>
-            <h1 class="profile__name"><?= esc($profile['name']) ?></h1>
-            <p class="profile__bio"><?= esc($profile['bio']) ?></p>
-            <ul class="profile__links">
+<!-- 프로필: 페이지에 하나뿐인 다크 터미널 카드 -->
+<section id="profile" class="section section--hero">
+    <div class="container">
+        <div class="tui">
+            <pre class="tui__wordmark" aria-label="<?= esc($profile['name'], 'attr') ?>"> ███  █   █  █  █  ███  █   █
+█      █ █   █ █    █   ██ ██
+█       █    ██     █   █ █ █
+█       █    █ █    █   █   █
+ ███    █    █  █  ███  █   █</pre>
+
+            <div class="tui__prompt">
+                <span class="tui__pipe">│</span>
+                <span class="tui__cmd">whoami</span>
+                <span class="tui__token">[<?= esc($profile['role']) ?>]</span>
+            </div>
+
+            <div class="tui__output">
+                <h1 class="tui__name"><?= esc($profile['name']) ?></h1>
+                <p><?= esc($profile['bio']) ?></p>
+            </div>
+
+            <ul class="tui__hints">
                 <?php foreach ($profile['links'] as $link): ?>
-                    <li><a href="<?= esc($link['url'], 'attr') ?>" target="_blank" rel="noopener"><?= esc($link['label']) ?> ↗</a></li>
+                    <li><a href="<?= esc($link['url'], 'attr') ?>" target="_blank" rel="noopener"><?= esc(strtolower($link['label'])) ?> ↗</a></li>
                 <?php endforeach ?>
+                <li><a href="#works">works ↓</a></li>
             </ul>
         </div>
     </div>
 </section>
 
-<section id="works" class="showcase">
+<!-- 진열장 -->
+<section id="works" class="section">
     <div class="container">
-        <header class="showcase__header">
-            <h2 class="showcase__title">Works</h2>
-            <span class="showcase__count"><?= count($works) ?> pieces</span>
+        <header class="section-label">
+            <h2>[+] Works</h2>
+            <span><?= count($works) ?> pieces</span>
         </header>
 
-        <div class="showcase__case">
-            <ul class="showcase__grid">
-                <?php foreach ($works as $i => $work): ?>
-                    <li class="exhibit">
-                        <article class="exhibit__item">
-                            <div class="exhibit__object" aria-hidden="true">
-                                <span><?= esc(mb_substr($work['title'], 0, 1)) ?></span>
-                            </div>
-                            <div class="exhibit__plate">
-                                <p class="exhibit__meta">No.<?= sprintf('%02d', $i + 1) ?> · <?= esc($work['year']) ?></p>
-                                <h3 class="exhibit__title"><?= esc($work['title']) ?></h3>
-                                <p class="exhibit__summary"><?= esc($work['summary']) ?></p>
-                                <ul class="exhibit__tags">
-                                    <?php foreach ($work['tags'] as $tag): ?>
-                                        <li><?= esc($tag) ?></li>
-                                    <?php endforeach ?>
-                                </ul>
-                            </div>
-                        </article>
-                    </li>
-                <?php endforeach ?>
-            </ul>
-        </div>
+        <ul class="cabinet">
+            <?php foreach ($works as $i => $work): ?>
+                <li class="exhibit">
+                    <div class="exhibit__object" aria-hidden="true"><?= esc(mb_substr($work['title'], 0, 1)) ?></div>
+                    <p class="exhibit__meta">No.<?= sprintf('%02d', $i + 1) ?> · <?= esc($work['year']) ?></p>
+                    <h3 class="exhibit__title"><?= esc($work['title']) ?></h3>
+                    <p class="exhibit__summary"><?= esc($work['summary']) ?></p>
+                    <p class="exhibit__tags">
+                        <?php foreach ($work['tags'] as $tag): ?>
+                            <span>[<?= esc($tag) ?>]</span>
+                        <?php endforeach ?>
+                    </p>
+                </li>
+            <?php endforeach ?>
+        </ul>
     </div>
 </section>
 
