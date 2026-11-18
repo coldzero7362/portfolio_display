@@ -141,7 +141,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 /* 프로필 이미지 + 워드마크 한 줄 */
 .tui__head {
     display: flex;
-    align-items: center;
+    align-items: flex-end;   /* 로고를 사진 아래선에 맞춤 */
     gap: 32px;
     margin-bottom: 40px;
 }
