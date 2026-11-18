@@ -1,0 +1,14 @@
+title: cykim
+description: 포트폴리오 전시대
+url: "https://coldzero7362.github.io"
+baseurl: "/portfolio_display"   # 저장소 이름. coldzero7362.github.io 저장소로 옮기면 "" 로
+
+markdown: kramdown
+
+exclude:
+  - README.md
+  - DESIGN.md
+  - Gemfile
+  - Gemfile.lock
+  - docker-compose.yml
+  - vendor

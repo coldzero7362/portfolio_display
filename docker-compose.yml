@@ -1,14 +1,18 @@
+# 로컬 미리보기 전용 (GitHub Pages 배포에는 쓰이지 않음)
+# docker compose up -d  →  http://<서버IP>:8001
 services:
-  app:
-    build: ./docker
-    container_name: cykim-homepage
-    restart: unless-stopped
+  jekyll:
+    image: ruby:3.3
+    container_name: portfolio-preview
+    working_dir: /site
+    # 빌드 결과는 컨테이너 안(/tmp/_site)에만 둬서 root 소유 파일이 안 생기게
+    # Gemfile.lock 은 호스트 사용자(1001) 소유로 맞춤
+    command: sh -c "bundle install --quiet && chown 1001:1001 Gemfile.lock && bundle exec jekyll serve --host 0.0.0.0 --port 4000 --baseurl '' --force_polling --destination /tmp/_site"
     ports:
-      - "8001:80"
+      - "8001:4000"
     volumes:
-      - ./:/var/www/html   # 코드 수정 즉시 반영
-    networks: [shared]
+      - ./:/site
+      - bundle:/usr/local/bundle   # gem 캐시 (재시작 시 재설치 방지)
 
-networks:
-  shared:
-    external: true
+volumes:
+  bundle:

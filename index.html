@@ -1,0 +1,69 @@
+---
+layout: default
+---
+{%- assign profile = site.data.profile -%}
+{%- assign works = site.data.works -%}
+{%- assign avatar = site.static_files | where: "path", profile.image | first -%}
+
+<!-- 프로필: 페이지에 하나뿐인 다크 터미널 카드 -->
+<section id="profile" class="section section--hero">
+    <div class="container">
+        <div class="tui">
+            <div class="tui__head">
+                {%- if avatar %}
+                <img class="tui__avatar" src="{{ profile.image | relative_url }}" alt="{{ profile.name }} 프로필 사진">
+                {%- else %}
+                <div class="tui__avatar tui__avatar--empty" aria-hidden="true">{{ profile.initial }}</div>
+                {%- endif %}
+                {% include wordmark.html text=profile.wordmark class="tui__wordmark" %}
+            </div>
+
+            <dl class="tui__prompt">
+                {%- for line in profile.prompt %}
+                <div class="tui__line">
+                    <dt><span class="tui__pipe">│</span><span class="tui__cmd">{{ line.cmd }}</span></dt>
+                    <dd class="tui__token">[{{ line.value }}]</dd>
+                </div>
+                {%- endfor %}
+            </dl>
+
+            <div class="tui__output">
+                <h1 class="tui__name">{{ profile.name }}</h1>
+                <p>{{ profile.bio }}</p>
+            </div>
+
+            <ul class="tui__hints">
+                {%- for link in profile.links %}
+                <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label | downcase }} ↗</a></li>
+                {%- endfor %}
+                <li><a href="#works">works ↓</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- 진열장 -->
+<section id="works" class="section">
+    <div class="container">
+        <header class="section-label">
+            <h2>[+] Works</h2>
+            <span>{{ works.size }} pieces</span>
+        </header>
+
+        <ul class="cabinet">
+            {%- for work in works %}
+            <li class="exhibit">
+                <div class="exhibit__object" aria-hidden="true">{{ work.title | slice: 0 }}</div>
+                <p class="exhibit__meta">No.{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }} · {{ work.year }}</p>
+                <h3 class="exhibit__title">{{ work.title }}</h3>
+                <p class="exhibit__summary">{{ work.summary }}</p>
+                <p class="exhibit__tags">
+                    {%- for tag in work.tags %}
+                    <span>[{{ tag }}]</span>
+                    {%- endfor %}
+                </p>
+            </li>
+            {%- endfor %}
+        </ul>
+    </div>
+</section>
