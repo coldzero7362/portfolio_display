@@ -166,8 +166,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .tui__wordmark {
     display: block;
-    flex: 1;
-    max-width: 640px;
+    width: 420px;
+    max-width: 100%;
     min-width: 0;
     height: auto;
     fill: var(--on-dark);
@@ -336,7 +336,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
     .tui__avatar--empty { font-size: 28px; }
 
-    .tui__wordmark { width: 100%; }
+    .tui__wordmark { width: 240px; }
 
     .tui__output,
     .tui__hints { padding-left: 8px; padding-right: 8px; }
