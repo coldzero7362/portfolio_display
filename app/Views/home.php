@@ -6,6 +6,12 @@
 <section id="profile" class="section section--hero">
     <div class="container">
         <div class="tui">
+            <div class="tui__head">
+            <?php if ($profile['image']): ?>
+                <img class="tui__avatar" src="<?= base_url($profile['image']) ?>" alt="<?= esc($profile['name'], 'attr') ?> 프로필 사진">
+            <?php else: ?>
+                <div class="tui__avatar tui__avatar--empty" aria-hidden="true"><?= esc($profile['initial']) ?></div>
+            <?php endif ?>
             <?php
             // 블록 픽셀 워드마크: 글꼴 렌더링 대신 SVG 사각형으로 그려 틈·번짐 방지
             $pixels = [
@@ -26,6 +32,7 @@
                     <?php endforeach ?>
                 <?php endforeach ?>
             </svg>
+            </div>
 
             <div class="tui__prompt">
                 <span class="tui__pipe">│</span>

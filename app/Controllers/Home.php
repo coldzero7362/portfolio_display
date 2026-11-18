@@ -12,10 +12,15 @@ class Home extends BaseController
             'role'    => 'Web Developer',
             'bio'     => '만들고, 다듬고, 진열합니다. 여기는 제가 만든 것들을 모아둔 작은 전시대입니다.',
             'initial' => 'C',
+            'image'   => 'assets/img/profile.jpg', // public/ 기준. 파일이 없으면 이니셜 표시
             'links'   => [
                 ['label' => 'GitHub', 'url' => 'https://github.com/coldzero7362'],
             ],
         ];
+
+        if (! is_file(FCPATH . $profile['image'])) {
+            $profile['image'] = null;
+        }
 
         $works = [
             ['title' => '포트폴리오 전시대', 'summary' => '지금 보고 계신 이 사이트. CodeIgniter 4와 Docker로 구성했습니다.', 'tags' => ['CodeIgniter 4', 'Docker'], 'year' => 2026],

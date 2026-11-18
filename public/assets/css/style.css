@@ -133,25 +133,48 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 /* ---------- profile: dark TUI card ---------- */
 .tui {
-    padding: 64px 32px 32px;
+    padding: 48px 32px 32px;
     background: var(--surface-dark);
     color: var(--on-dark);
+}
+
+/* 프로필 이미지 + 워드마크 한 줄 */
+.tui__head {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 40px;
+}
+
+.tui__avatar {
+    flex: none;
+    width: 112px;
+    height: 112px;
+    object-fit: cover;
+    border: 1px solid var(--surface-dark-elevated);
+    border-radius: var(--radius-sm);
+}
+
+.tui__avatar--empty {
+    display: grid;
+    place-items: center;
+    background: var(--surface-dark-elevated);
+    color: var(--ash);
+    font-size: 38px;
+    font-weight: 700;
 }
 
 .tui__wordmark {
     display: block;
     width: 280px;
-    max-width: 100%;
+    min-width: 0;
     height: auto;
-    margin: 0 auto 48px;
     fill: var(--on-dark);
 }
 
 .tui__prompt {
     display: flex;
     gap: 12px;
-    max-width: 640px;
-    margin: 0 auto;
     padding: 8px 12px;
     border-radius: var(--radius-sm);
     background: var(--surface-dark-elevated);
@@ -165,7 +188,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .tui__output {
     max-width: 640px;
-    margin: 16px auto 0;
+    margin-top: 16px;
     padding: 0 12px;
     color: var(--ash);
 }
@@ -180,9 +203,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 .tui__hints {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     gap: 8px 24px;
-    margin-top: 48px;
+    margin-top: 40px;
+    padding: 0 12px;
     font-size: 14px;
 }
 
@@ -285,13 +308,22 @@ ul { margin: 0; padding: 0; list-style: none; }
 
     .tui { padding: 40px 16px 24px; }
 
-    .tui__wordmark {
-        width: 200px;
+    .tui__head {
+        gap: 16px;
         margin-bottom: 32px;
     }
 
-    .tui__prompt,
-    .tui__output { padding-left: 8px; padding-right: 8px; }
+    .tui__avatar {
+        width: 72px;
+        height: 72px;
+    }
+
+    .tui__avatar--empty { font-size: 28px; }
+
+    .tui__wordmark { width: 180px; }
+
+    .tui__output,
+    .tui__hints { padding-left: 8px; padding-right: 8px; }
 
     .tui__name { font-size: 28px; }
 
