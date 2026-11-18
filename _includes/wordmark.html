@@ -1,0 +1,29 @@
+{%- comment -%}
+  블록 픽셀 워드마크를 SVG로 그린다. 글꼴(█) 대신 사각형이라 틈·색 번짐이 없다.
+  사용: {% include wordmark.html text="Small_Golem" class="tui__wordmark" %}
+  글리프: _data/glyphs.yml
+{%- endcomment -%}
+{%- assign cw = 3 -%}{%- comment -%} 셀 가로 (고정폭 글자 비율 0.6 : 1) {%- endcomment -%}
+{%- assign ch = 5 -%}{%- comment -%} 셀 세로 {%- endcomment -%}
+{%- assign gap = 2 -%}{%- comment -%} 글자 사이 빈 칸 {%- endcomment -%}
+{%- assign chars = include.text | upcase | split: "" -%}
+{%- assign x = 0 -%}
+{%- capture rects -%}
+  {%- for c in chars -%}
+    {%- assign glyph = site.data.glyphs[c] | default: site.data.glyphs[" "] -%}
+    {%- assign w = glyph[0] | size -%}
+    {%- for line in glyph -%}
+      {%- assign y = forloop.index0 | times: ch -%}
+      {%- assign cells = line | split: "" -%}
+      {%- for cell in cells -%}
+        {%- if cell == "#" -%}
+          <rect x="{{ x | plus: forloop.index0 | times: cw }}" y="{{ y }}" width="{{ cw }}" height="{{ ch }}"/>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- assign x = x | plus: w | plus: gap -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{%- assign width = x | minus: gap | times: cw -%}
+{%- assign height = 5 | times: ch -%}
+<svg class="{{ include.class }}" viewBox="0 0 {{ width }} {{ height }}" role="img" aria-label="{{ include.text | escape }}" shape-rendering="crispEdges">{{ rects }}</svg>
