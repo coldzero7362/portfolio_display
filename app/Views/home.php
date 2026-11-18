@@ -6,11 +6,26 @@
 <section id="profile" class="section section--hero">
     <div class="container">
         <div class="tui">
-            <pre class="tui__wordmark" aria-label="<?= esc($profile['name'], 'attr') ?>"> ███  █   █  █  █  ███  █   █
-█      █ █   █ █    █   ██ ██
-█       █    ██     █   █ █ █
-█       █    █ █    █   █   █
- ███    █    █  █  ███  █   █</pre>
+            <?php
+            // 블록 픽셀 워드마크: 글꼴 렌더링 대신 SVG 사각형으로 그려 틈·번짐 방지
+            $pixels = [
+                ' ###  #   #  #  #  ###  #   #',
+                '#      # #   # #    #   ## ##',
+                '#       #    ##     #   # # #',
+                '#       #    # #    #   #   #',
+                ' ###    #    #  #  ###  #   #',
+            ];
+            $cw = 3; $ch = 5; // 셀 비율 = 고정폭 글자 비율(0.6 : 1)
+            $cols = max(array_map('strlen', $pixels));
+            ?>
+            <svg class="tui__wordmark" viewBox="0 0 <?= $cols * $cw ?> <?= count($pixels) * $ch ?>" role="img" aria-label="<?= esc($profile['name'], 'attr') ?>" shape-rendering="crispEdges">
+                <?php foreach ($pixels as $y => $row): ?>
+                    <?php preg_match_all('/#+/', $row, $runs, PREG_OFFSET_CAPTURE) ?>
+                    <?php foreach ($runs[0] as [$run, $x]): ?>
+                        <rect x="<?= $x * $cw ?>" y="<?= $y * $ch ?>" width="<?= strlen($run) * $cw ?>" height="<?= $ch ?>"/>
+                    <?php endforeach ?>
+                <?php endforeach ?>
+            </svg>
 
             <div class="tui__prompt">
                 <span class="tui__pipe">│</span>

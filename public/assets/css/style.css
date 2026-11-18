@@ -139,13 +139,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 
 .tui__wordmark {
-    width: max-content;
+    display: block;
+    width: 280px;
+    max-width: 100%;
+    height: auto;
     margin: 0 auto 48px;
-    font-family: var(--font);
-    font-size: 16px;
-    line-height: 1;
-    font-weight: 700;
-    color: var(--on-dark);
+    fill: var(--on-dark);
 }
 
 .tui__prompt {
@@ -287,7 +286,7 @@ ul { margin: 0; padding: 0; list-style: none; }
     .tui { padding: 40px 16px 24px; }
 
     .tui__wordmark {
-        font-size: 11px;
+        width: 200px;
         margin-bottom: 32px;
     }
 
