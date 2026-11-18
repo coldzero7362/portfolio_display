@@ -1,0 +1,21 @@
+# 프로필 카드 내용
+
+name: cykim
+wordmark: Small_Golem        # 픽셀 로고 글자 (A-Z, 0, 1, _, -, 공백)
+initial: C                   # 프로필 사진이 없을 때 표시
+image: /assets/img/profile.jpg   # 이 경로에 파일을 넣으면 자동으로 사진 표시
+
+# 명령줄 (cmd = 왼쪽 명령어, value = [ ] 안 값). 줄 수 자유
+prompt:
+  - cmd: whoami
+    value: Web Developer
+  - cmd: stack
+    value: PHP · CodeIgniter 4 · Docker
+  - cmd: status
+    value: 새로운 것을 만드는 중
+
+bio: 만들고, 다듬고, 진열합니다. 여기는 제가 만든 것들을 모아둔 작은 전시대입니다.
+
+links:
+  - label: GitHub
+    url: https://github.com/coldzero7362
