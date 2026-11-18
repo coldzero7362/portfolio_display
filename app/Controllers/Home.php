@@ -6,9 +6,12 @@ class Home extends BaseController
 {
     public function index(): string
     {
+        helper('wordmark');
+
         // TODO: 프로필과 작품 목록은 추후 DB로 이전
         $profile = [
-            'name'    => 'cykim',
+            'name'     => 'cykim',
+            'wordmark' => 'Small_Golem', // 프로필 카드 픽셀 로고 글자
             'role'    => 'Web Developer',
             'bio'     => '만들고, 다듬고, 진열합니다. 여기는 제가 만든 것들을 모아둔 작은 전시대입니다.',
             'initial' => 'C',
