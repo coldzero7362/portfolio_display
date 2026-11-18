@@ -12,7 +12,12 @@ class Home extends BaseController
         $profile = [
             'name'     => 'cykim',
             'wordmark' => 'Small_Golem', // 프로필 카드 픽셀 로고 글자
-            'role'    => 'Web Developer',
+            // 프로필 카드 명령줄 (cmd = 왼쪽 명령어, value = [ ] 안 값). 줄 수 자유
+            'prompt'  => [
+                ['cmd' => 'whoami',   'value' => 'Web Developer'],
+                ['cmd' => 'stack',    'value' => 'PHP · CodeIgniter 4 · Docker'],
+                ['cmd' => 'status',   'value' => '새로운 것을 만드는 중'],
+            ],
             'bio'     => '만들고, 다듬고, 진열합니다. 여기는 제가 만든 것들을 모아둔 작은 전시대입니다.',
             'initial' => 'C',
             'image'   => 'assets/img/profile.jpg', // public/ 기준. 파일이 없으면 이니셜 표시

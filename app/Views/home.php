@@ -15,11 +15,14 @@
                 <?= pixel_wordmark($profile['wordmark'], 'tui__wordmark') ?>
             </div>
 
-            <div class="tui__prompt">
-                <span class="tui__pipe">│</span>
-                <span class="tui__cmd">whoami</span>
-                <span class="tui__token">[<?= esc($profile['role']) ?>]</span>
-            </div>
+            <dl class="tui__prompt">
+                <?php foreach ($profile['prompt'] as $line): ?>
+                    <div class="tui__line">
+                        <dt><span class="tui__pipe">│</span><span class="tui__cmd"><?= esc($line['cmd']) ?></span></dt>
+                        <dd class="tui__token">[<?= esc($line['value']) ?>]</dd>
+                    </div>
+                <?php endforeach ?>
+            </dl>
 
             <div class="tui__output">
                 <h1 class="tui__name"><?= esc($profile['name']) ?></h1>

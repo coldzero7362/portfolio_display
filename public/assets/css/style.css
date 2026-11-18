@@ -173,13 +173,25 @@ ul { margin: 0; padding: 0; list-style: none; }
     fill: var(--on-dark);
 }
 
+/* 명령줄 여러 줄: 명령어 열 폭을 맞춰 값이 세로로 정렬되게 */
 .tui__prompt {
-    display: flex;
-    gap: 12px;
-    padding: 8px 12px;
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 16px;
+    margin: 0;
+    padding: 12px;
     border-radius: var(--radius-sm);
     background: var(--surface-dark-elevated);
 }
+
+.tui__line { display: contents; }
+
+.tui__line dt {
+    display: flex;
+    gap: 12px;
+}
+
+.tui__line dd { margin: 0; }
 
 .tui__pipe { color: var(--ash); }
 
