@@ -1,0 +1,14 @@
+services:
+  app:
+    build: ./docker
+    container_name: cykim-homepage
+    restart: unless-stopped
+    ports:
+      - "8001:80"
+    volumes:
+      - ./:/var/www/html   # 코드 수정 즉시 반영
+    networks: [shared]
+
+networks:
+  shared:
+    external: true
